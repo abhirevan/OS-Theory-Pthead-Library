@@ -1,4 +1,10 @@
 #include<stdio.h>
+#include <stdlib.h>
+#include "utilities.h"
+#include <linux/unistd.h>
+#include <sys/syscall.h>
+#include <unistd.h>
+
 /*
  * Function that gets the number of CPU cores
  */
@@ -31,4 +37,10 @@ int get_hyperthreads() {
 	fgets(resultString, 2, fp);
 	status = pclose(fp);
 	return atoi(resultString);
+}
+/*
+ * This function gets the kthread id
+ */
+pid_t gettid(void) {
+	return syscall(__NR_gettid);
 }
